@@ -1,0 +1,49 @@
+#######################################
+# Syntax Coloring Map For LiquidCrystal
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+GLCD128x64	KEYWORD1	GLCD128x64
+GLCD	KEYWORD1	GLCD
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+textMode	KEYWORD2
+clear	KEYWORD2
+home	KEYWORD2
+noDisplay	KEYWORD2
+display	KEYWORD2
+noBlink	KEYWORD2
+blink	KEYWORD2
+noCursor	KEYWORD2
+cursor	KEYWORD2
+setCursor	KEYWORD2
+
+graphicMode	KEYWORD2
+drawPixel	KEYWORD2
+drawLine	KEYWORD2
+drawCircle	KEYWORD2
+renderScreenBuffer	KEYWORD2
+clearScreenBuffer	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+SCREEN_COMPLETE LITERAL1 SCREEN_COMPLETE
+SCREEN_TOP_HALF LITERAL1
+SCREEN_BOTTOM_HALF LITERAL1
+SCREEN_QUADRANT_1 LITERAL1
+SCREEN_QUADRANT_2 LITERAL1
+SCREEN_QUADRANT_3 LITERAL1
+SCREEN_QUADRANT_4 LITERAL1
+
+
+

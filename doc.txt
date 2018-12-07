@@ -1,0 +1,351 @@
+GLCD128x64 Library
+===================
+This library allows an Arduino board to control Graphic Liquid Crystal Displays (GLCDs) based on the ST920 chipset. The library work on 8-bits mode (using 8 data lines plush to the RS, EN, and, optionally, PBS and RW control lines).
+
+
+Functions
+=========
+
+GLCD128x64()
+------------
+
+@Description
+Creates a variable of type GLCD. The display can be controlled using 8 data lines. The RW pin can be tied to ground instead of connected to a pin on the Arduino, the PBS pin can be tied to Vcc instread of connected to a pin on the Arduino; if so, omit its from this function's parameters. 
+
+@Syntax
+GLCD128x64( rs, rw, en, pbs, d7, d6, d5, d4, d3, d2, d1, d0 )
+GLCD128x64( rs, rw, en, d7, d6, d5, d4, d3, d2, d1, d0 )
+GLCD128x64( rs, en, d7, d6, d5, d4, d3, d2, d1, d0 )
+
+@Parameters
+rs: the number of the Arduino pin that is connected to the RS pin on the LCD
+
+rw: the number of the Arduino pin that is connected to the RW pin on the LCD (optional)
+
+en: the number of the Arduino pin that is connected to the EN pin on the LCD 
+
+pbs: the number of the Arduino pin that is connected to the PBS pin on the LCD
+
+d7, d6, d5, d4, d3, d2, d1, d0: the numbers of the Arduino pins that are connected to the corresponding data pins on the LCD.
+
+
+@Example
+#include <GLCD128x64.h>
+
+GLCD128x64 glcd( 17, 16, 18, 14, 7, 6, 5, 4, 11, 10, 9, 8 );
+
+void setup() {
+  //set up the GLCD
+  glcd.begin();
+}
+  
+void loop(){}
+
+
+begin()
+-------
+
+@Description
+Initialize the interface to the GLCD screen. begin() function needs to be called before aby other GLCD library function.
+
+@Syntax
+glcd.begin()
+
+@Parameters
+None
+
+
+
+clear()
+-------
+
+@Description
+Clears the GLCD screen and positions the cursor in the upper-left corner. 
+
+@Syntax
+glcd.clear()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+home()
+-------
+
+@Description
+Positions the cursor in the upper-left of the GLCD. That is, use that location in outputting subsequent text to the display. To also clear the display, use the clear() function instead. 
+
+@Syntax
+glcd.home()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+
+setCursor()
+-----------
+
+@Description
+Position the GLCD cursor; that is, set the location at which subsequent text written to the LCD will be displayed. 
+
+@Syntax
+glcd.setCursor( col, row )
+
+@Parameters
+col: the column at which to position the cursor (with 0 being the first column)
+row: the row at which to position the cursor (with 0 being the first row) 
+
+@Note:
+The cursor in this class of GLCD take two consecutive positions, in consecuence the max column number is 8. 
+This function only can be called on text mode
+
+
+
+write()
+-----------
+
+@Description
+Position the GLCD cursor; that is, set the location at which subsequent text written to the LCD will be displayed. 
+
+@Syntax
+glcd.write( data )
+
+@Parameters
+data: the character to write to the display 
+
+@Note
+This function only can be called on text mode
+
+
+
+print()
+-----------
+
+@Description
+Position the GLCD cursor; that is, set the location at which subsequent text written to the LCD will be displayed. 
+
+@Syntax
+glcd.print( data )
+glcd.print( data, BASE )
+
+@Parameters
+data: the data to print (char, byte, int, long, or string) 
+BASE (optional): the base in which to print numbers: BIN for binary (base 2), DEC for decimal (base 10), OCT for octal (base 8), HEX for hexadecimal (base 16). 
+
+@Note
+This function only can be called on text mode
+
+
+cursor()
+-----------
+
+@Description
+Display the GLCD cursor: an underscore (line) at the position to which the next character will be written.
+
+@Syntax
+glcd.cursor()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+noCursor()
+-----------
+
+@Description
+Hides the GLCD cursor. 
+
+@Syntax
+glcd.noCursor()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+
+blink()
+-----------
+
+@Description
+Display the blinking GLCD cursor.
+
+@Syntax
+glcd.blink()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+noBlink()
+-----------
+
+@Description
+Turns off the blinking GLCD cursor. 
+
+@Syntax
+glcd.noBlink()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+display()
+-----------
+
+@Description
+Turns on the GLCD display, after it's been turned off with noDisplay(). This will restore the text (and cursor) that was on the display. 
+
+@Syntax
+glcd.display()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+noDisplay()
+-----------
+
+@Description
+Turns off the GLCD display, without losing the text currently shown on it. 
+
+@Syntax
+glcd.noDisplay()
+
+@Parameters
+None
+
+@Note
+This function only can be called on text mode
+
+
+graphicMode()
+-----------
+
+@Description
+Put the GLCD on graphic mode. 
+
+@Syntax
+glcd.graphicMode()
+
+@Parameters
+None
+
+
+drawPixel()
+-----------
+
+@Description
+Draw one pixel on BufferScreen
+
+@Syntax
+glcd.drawPixel( x, y );
+
+@Parameters
+x: horizontal coordinate. range = [0; 128)
+y: vertical coordinate. Range = [0; 64)
+
+@Notes:
+This function work over one buffer, for display the change use the function renderScreenBuffer()
+
+
+drawCircle()
+-----------
+
+@Description
+Draw one circle on the Screen Buffer 
+
+@Syntax
+glcd.drawCircle( x, y, r );
+
+@Parameters
+x: horizontal coordinate for circle center. range = [0; 128)
+y: vertical coordinate for circle center. Range = [0; 64)
+r: radius of the circle
+
+@Notes:
+This function work over one buffer, for display the change use the function renderScreenBuffer()
+
+
+
+renderScreenBuffer()
+--------------------
+
+@Description
+Display the content of screen buffer on the GLCD
+
+@Syntax
+glcd.renderScreenBuffer( );
+glcd.renderScreenBuffer( screen_section );
+
+@Parameters
+screen_section: one of the next constants
+	SCREEN_COMPLETE: update the entire screen
+	SCREEN_TOP_HALF: update the top half screen
+	SCREEN_BOTTOM_HALF : update the bottom half screen
+  	SCREEN_QUADRANT_1 : update the quadrant 1 of screen 
+  	SCREEN_QUADRANT_2 : update the quadrant 2 of screen
+  	SCREEN_QUADRANT_3 : update the quadrant 3 of screen
+  	SCREEN_QUADRANT_4 : update the quadrant 4 of screen 
+
+@Note
++-----------+-----------+
+| QUADRANT2 | QUADRANT1 |
++-----------+-----------+
+| QUADRANT3 | QUADRANT4 |
++-----------+-----------+
+
+
+clearScreenBuffer()
+-------------------
+
+@Description
+Off all bit of screen buffer
+
+@Syntax
+glcd.clearScreenBuffer( );
+
+@Parameters
+None
+
+@Notes
+This function work over one buffer, for display the change use the function renderScreenBuffer()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
